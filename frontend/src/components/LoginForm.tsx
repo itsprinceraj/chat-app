@@ -66,9 +66,11 @@ export default function LoginForm() {
 
   const onSubmit = async (data: FormData) => {
     try {
+      console.log(data);
       await loginUser(data).unwrap();
       toast.success("User logged in successfully!");
       navigate("/", { replace: true });
+      console.log(data);
     } catch (error: any) {
       const validationError = error?.data?.data?.errors?.[0].msg;
       toast.error(

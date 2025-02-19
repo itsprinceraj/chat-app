@@ -72,9 +72,11 @@ export default function SignupForm() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await registerUser(data).unwrap();
+      const { confirmPassword, name, ...payload } = data;
+      await registerUser(payload).unwrap();
       toast.success("User register successfully!");
       navigate("/");
+      console.log(data);
     } catch (error: any) {
       const validationError = error?.data?.data?.errors?.[0].msg;
       toast.error(
